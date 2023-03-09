@@ -1,0 +1,16 @@
+.item-tree {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    font-size: 20px;
+
+    &_active {
+        background-color: #f5f5f5;
+    }
+
+    &__chevron {
+        display: flex;
+        align-items: center;
+    }
+}

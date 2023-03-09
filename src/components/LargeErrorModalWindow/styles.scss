@@ -1,0 +1,41 @@
+.error-lg-modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-error-lg {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+
+    &__title {
+        text-transform: capitalize;
+        padding: 16px;
+        font-size: 1.25rem;
+        font-weight: 500;
+        line-height: 1.6;
+        letter-spacing: 0.0075em;
+        border-bottom: 1px solid #ddd;
+    }
+
+    &__message {
+        padding: 16px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    &__btn {
+        padding: 16px;
+        width: 100%;
+    }
+}

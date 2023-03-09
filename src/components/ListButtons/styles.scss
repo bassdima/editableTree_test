@@ -1,0 +1,16 @@
+.buttons-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    align-items: center;
+}
+
+.primary-list-btn {
+    display: flex;
+    color: #3f51b5;
+}
+
+.secondary-list-btn {
+    display: flex;
+    color: #f50057;
+}

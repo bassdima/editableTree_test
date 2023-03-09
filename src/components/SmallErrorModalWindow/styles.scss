@@ -1,0 +1,26 @@
+.s-error-modal {
+    position: absolute;
+    top: 1%;
+    right: 481px;
+    left: 0;
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    background: #d7e5ff;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cross {
+    color: #3f51b5;
+    font-size: 1.125rem;
+    cursor: pointer;
+
+    &:hover {
+        color: #354288;
+    }
+}
