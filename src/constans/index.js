@@ -1,7 +1,6 @@
 import {
     Apps,
     Menu,
-    Warning,
     SettingsInputComponent,
     AddCircleOutline,
     ModeEdit,
@@ -17,7 +16,6 @@ export const modalWindowContent = {
 export const sidebarContent = {
     demo: <Apps />,
     description: <Menu />,
-    journal: <Warning />,
     API: <SettingsInputComponent />
 }
 

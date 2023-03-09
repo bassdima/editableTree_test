@@ -25,8 +25,8 @@ export const EditableTree = ({
             {data &&
                 <div>
                     <div
-                        className={classNames("item-tree", {"item-tree_active": activeId === data.id})}
-                        onClick={() => {treeToogle(isVisable, setIsVisable, setActiveId, data)}}
+                        className={classNames("item-tree", { "item-tree_active": activeId === data.id })}
+                        onClick={() => { treeToogle(isVisable, setIsVisable, setActiveId, data) }}
                     >
                         {data.children.length > 0 &&
                             <div className="item-tree__chevron">
@@ -38,7 +38,11 @@ export const EditableTree = ({
                             </div>
                         }
                         <span>
-                            {data.name === userId ? "Root" : data.name}
+                            {data.name !== "undefined" &&
+                                <>
+                                    {data.name === userId ? "Root" : data.name}
+                                </>
+                            }
                         </span>
                         {activeId === data.id &&
                             <ListButtons

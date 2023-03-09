@@ -1,24 +1,17 @@
-import './App.scss';
+import "./App.scss";
 import { useState, useEffect } from "react";
 import {
-  EditListModalWindow,
   Sidebar,
   MainHeader,
-  LoaderModalWindow,
-  LargeErrorModalWindow,
-  SmallErrorModalWindow
+  ModalWindows
 } from "./components";
-import { PageEditableTree } from "./pages";
-import { useUserId } from './hooks';
-import {
-  getNodes,
-  postNode,
-  renameNode,
-  deleteNode
-} from './API';
+import { PageEditableTree, Description } from "./pages";
+import { useUserId } from "./hooks";
+import { getNodes } from './API';
+import { Routes, Route } from 'react-router-dom';
 
 export const App = () => {
-  const [node, setNode] = useState();
+  const [node, setNode] = useState("");
   const [activeId, setActiveId] = useState();
   const [inputText, setInputText] = useState("");
   const [modalWindowName, setModalWindowName] = useState();
@@ -28,6 +21,7 @@ export const App = () => {
   const [smallWindowErrorMessage, setSmallWindowErrorMessage] = useState("");
   const [isError, setIsError] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [activeSidebarItemName, setActiveSidebarItemName] = useState("demo");
 
   const userId = useUserId();
 
@@ -44,88 +38,48 @@ export const App = () => {
 
   return (
     <div className="app-container">
-      <Sidebar />
+      <Sidebar
+        activeItemName={activeSidebarItemName}
+        setActiveItemName={setActiveSidebarItemName}
+      />
       <div className='page-wrapper'>
-        <MainHeader />
-        <PageEditableTree
-          data={node}
-          activeId={activeId}
-          setActiveId={setActiveId}
-          setModalWindowName={setModalWindowName}
-          setIsModalWindowOpen={setIsModalWindowOpen}
-          userId={userId}
-          setItemName={setItemName}
+        <MainHeader
+          setActiveItemName={setActiveSidebarItemName}
         />
+        <Routes>
+          <Route path='/' element={
+            <PageEditableTree
+              data={node}
+              activeId={activeId}
+              setActiveId={setActiveId}
+              setModalWindowName={setModalWindowName}
+              setIsModalWindowOpen={setIsModalWindowOpen}
+              userId={userId}
+              setItemName={setItemName}
+            />
+          }/>
+          <Route path='/description' element={<Description />} />
+        </Routes>
       </div>
-      {modalWindowName === "add" && isModalWindowOpen &&
-        <EditListModalWindow
-          title="add"
-          label="node name"
-          inputText={inputText}
-          setInputText={setInputText}
-          modalWindowName={modalWindowName}
-          clickHandler={postNode}
-          setNode={setNode}
-          setIsLoading={setIsLoading}
-          setIsError={setIsError}
-          setLargeWindowErrorMessage={setLargeWindowErrorMessage}
-          setSmallWindowErrorMessage={setSmallWindowErrorMessage}
-          userId={userId}
-          activeId={activeId}
-          setIsModalWindowOpen={setIsModalWindowOpen}
-        />
-      }
-      {modalWindowName === "rename" && isModalWindowOpen &&
-        <EditListModalWindow
-          title="rename"
-          label="new node name"
-          inputText={inputText}
-          setInputText={setInputText}
-          modalWindowName={modalWindowName}
-          clickHandler={renameNode}
-          setNode={setNode}
-          setIsLoading={setIsLoading}
-          setIsError={setIsError}
-          setLargeWindowErrorMessage={setLargeWindowErrorMessage}
-          setSmallWindowErrorMessage={setSmallWindowErrorMessage}
-          userId={userId}
-          activeId={activeId}
-          setIsModalWindowOpen={setIsModalWindowOpen}
-        />
-      }
-      {modalWindowName === "delete" && isModalWindowOpen &&
-        <EditListModalWindow
-          title="delete"
-          label={`Do you want to delete ${itemName}?`}
-          modalWindowName={modalWindowName}
-          clickHandler={deleteNode}
-          setNode={setNode}
-          setIsLoading={setIsLoading}
-          setIsError={setIsError}
-          setLargeWindowErrorMessage={setLargeWindowErrorMessage}
-          setSmallWindowErrorMessage={setSmallWindowErrorMessage}
-          userId={userId}
-          activeId={activeId}
-          setIsModalWindowOpen={setIsModalWindowOpen}
-          itemName={itemName}
-        />
-      }
-      {isLoading &&
-        <LoaderModalWindow />
-      }
-      {largeWindowErrorMessage.length > 0 &&
-        <LargeErrorModalWindow
-          title={modalWindowName}
-          error={largeWindowErrorMessage}
-          setError={setLargeWindowErrorMessage}
-        />
-      }
-      {smallWindowErrorMessage.length > 0 &&
-        <SmallErrorModalWindow
-          error={smallWindowErrorMessage}
-          setError={setSmallWindowErrorMessage}
-        />
-      }
+      <ModalWindows
+        isModalWindowOpen={isModalWindowOpen}
+        inputText={inputText}
+        setInputText={setInputText}
+        modalWindowName={modalWindowName}
+        setLargeWindowErrorMessage={setLargeWindowErrorMessage}
+        setIsModalWindowOpen={setIsModalWindowOpen}
+        setNode={setNode}
+        setIsLoading={setIsLoading}
+        setIsError={setIsError}
+        setSmallWindowErrorMessage={setSmallWindowErrorMessage}
+        userId={userId}
+        activeId={activeId}
+        largeWindowErrorMessage={largeWindowErrorMessage}
+        isError={isError}
+        smallWindowErrorMessage={smallWindowErrorMessage}
+        itemName={itemName}
+        isLoading={isLoading}
+      />
     </div>
   );
 }
