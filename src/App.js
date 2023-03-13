@@ -12,40 +12,38 @@ import { Routes, Route } from 'react-router-dom';
 
 export const App = () => {
   const [node, setNode] = useState("");
-  const [activeId, setActiveId] = useState();
+  const [activeId, setActiveId] = useState(null);
   const [inputText, setInputText] = useState("");
-  const [modalWindowName, setModalWindowName] = useState();
-  const [isModalWindowOpen, setIsModalWindowOpen] = useState();
-  const [itemName, setItemName] = useState();
+  const [modalWindowName, setModalWindowName] = useState("");
+  const [isModalWindowOpen, setIsModalWindowOpen] = useState(false);
+  const [itemName, setItemName] = useState("");
   const [largeWindowErrorMessage, setLargeWindowErrorMessage] = useState("");
   const [smallWindowErrorMessage, setSmallWindowErrorMessage] = useState("");
-  const [isError, setIsError] = useState();
+  const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [activeSidebarItemName, setActiveSidebarItemName] = useState("demo");
 
   const userId = useUserId();
 
   useEffect(() => {
-    getNodes(
-      setNode,
-      setIsLoading,
-      setIsError,
-      setLargeWindowErrorMessage,
-      setSmallWindowErrorMessage,
-      userId
-    );
+    setIsLoading(true);
+    setIsError(false);
+    getNodes(userId)
+      .then((response) => {
+        setNode(response.data)
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        setIsError(true);
+        setLargeWindowErrorMessage(e.response.data.data.message);
+        setSmallWindowErrorMessage(`${e.response.data.data.message} (id=${e.response.data.id})`)
+      })
   }, [userId])
 
   return (
     <div className="app-container">
-      <Sidebar
-        activeItemName={activeSidebarItemName}
-        setActiveItemName={setActiveSidebarItemName}
-      />
+      <Sidebar />
       <div className='page-wrapper'>
-        <MainHeader
-          setActiveItemName={setActiveSidebarItemName}
-        />
+        <MainHeader />
         <Routes>
           <Route path='/' element={
             <PageEditableTree
@@ -57,7 +55,7 @@ export const App = () => {
               userId={userId}
               setItemName={setItemName}
             />
-          }/>
+          } />
           <Route path='/description' element={<Description />} />
         </Routes>
       </div>

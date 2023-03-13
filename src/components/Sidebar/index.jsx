@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { SidebarHeader, SidebarMenu } from "../index";
+import { useResponsive  } from "../../hooks";
 import "./styles.scss";
 
-export const Sidebar = ({ activeItemName, setActiveItemName }) => {
-    const [sidebarIsOpen, setSidebarIsOpen] = useState(true);
+export const Sidebar = () => {
+    const isTablet = useResponsive();
+    const [sidebarIsOpen, setSidebarIsOpen] = useState(isTablet);
 
     return (
         <div className="sidebar-container">
@@ -13,8 +15,6 @@ export const Sidebar = ({ activeItemName, setActiveItemName }) => {
             />
             <SidebarMenu
                 sidebarIsOpen={sidebarIsOpen}
-                activeItemName={activeItemName}
-                setActiveItemName={setActiveItemName}
             />
         </div>
     );

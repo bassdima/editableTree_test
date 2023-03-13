@@ -1,32 +1,29 @@
 import { sidebarContent } from "../../constans";
 import { Fragment } from "react";
 import { SidebarButton } from "../index";
-import { Link } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 import "./styles.scss";
 
-export const SidebarMenu = ({ sidebarIsOpen, activeItemName, setActiveItemName }) => {
+export const SidebarMenu = ({ sidebarIsOpen }) => {
     return (
         <section className="sidebar-menu">
             {Object.keys(sidebarContent).map((item) =>
                 <Fragment key={item}>
                     {item !== "API" ?
-                        <Link
-                            className="sidebar-menu__btn"
-                            onClick={() => {setActiveItemName(item)}}
+                        <NavLink
+                            className={({ isActive }) =>  isActive ? "sidebar-menu__btn_checked" : "sidebar-menu__btn"}
                             to={item === "demo" ? "/" : `/description`}
                         >
                             <SidebarButton
                                 item={item}
-                                activeItemName={activeItemName}
                                 sidebarContent={sidebarContent}
                                 sidebarIsOpen={sidebarIsOpen}
                             />
-                        </Link>
+                        </NavLink>
                         :
                         <a className="sidebar-menu__btn" href="https://test.vmarmysh.com/swagger/user.html">
                             <SidebarButton
                                 item={item}
-                                activeItemName={activeItemName}
                                 sidebarContent={sidebarContent}
                                 sidebarIsOpen={sidebarIsOpen}
                             />

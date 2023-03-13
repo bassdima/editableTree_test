@@ -7,6 +7,12 @@
     &__btn {
         text-decoration: none;
         font-weight: bold;
-        width: 100%;
+
+        &_checked {
+            background: #eeeff8;
+            color: #393393;
+            text-decoration: none;
+            font-weight: bold;
+        }
     }
 }

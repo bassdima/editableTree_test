@@ -38,11 +38,7 @@ export const EditableTree = ({
                             </div>
                         }
                         <span>
-                            {data.name !== "undefined" &&
-                                <>
-                                    {data.name === userId ? "Root" : data.name}
-                                </>
-                            }
+                            {data.name === userId ? "Root" : data.name}
                         </span>
                         {activeId === data.id &&
                             <ListButtons

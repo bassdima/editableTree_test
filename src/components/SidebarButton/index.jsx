@@ -1,15 +1,14 @@
 import classNames from 'classnames';
 import "./styles.scss";
 
-export const SidebarButton = ({ item, activeItemName, sidebarContent, sidebarIsOpen }) => {
+export const SidebarButton = ({ item, sidebarContent, sidebarIsOpen }) => {
     return (
         <div
             htmlFor={item}
             className={
                 classNames(
                     'sidebar-button',
-                    { 'sidebar-button_api': item === "API" },
-                    { 'sidebar-button_checked': item === activeItemName }
+                    { 'sidebar-button_api': item === "API" }
                 )
             }
         >

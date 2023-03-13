@@ -3,8 +3,14 @@ import {
     Button,
     SmallErrorModalWindow
 } from "../index";
-import { cancelBtnEditList } from "../../helpers";
 import {
+    cancelBtnEditList,
+    addItem,
+    renameItem,
+    deleteItem
+} from "../../helpers";
+import {
+    getNodes,
     postNode,
     renameNode,
     deleteNode
@@ -45,7 +51,7 @@ export const ModalWindows = ({
                     <Button
                         additionalBtnClass="secondary-btn"
                         clickHandler={(event) => {
-                            postNode(
+                            addItem(
                                 event,
                                 setNode,
                                 setIsLoading,
@@ -56,8 +62,10 @@ export const ModalWindows = ({
                                 setIsModalWindowOpen,
                                 activeId,
                                 inputText,
-                                setInputText
-                            )
+                                setInputText,
+                                postNode,
+                                getNodes
+                            );
                         }}
                         title={modalWindowName}
                     />
@@ -78,7 +86,7 @@ export const ModalWindows = ({
                     <Button
                         additionalBtnClass="secondary-btn"
                         clickHandler={(event) => {
-                            renameNode(
+                            renameItem(
                                 event,
                                 setNode,
                                 setIsLoading,
@@ -89,7 +97,9 @@ export const ModalWindows = ({
                                 setIsModalWindowOpen,
                                 activeId,
                                 inputText,
-                                setInputText
+                                setInputText,
+                                renameNode,
+                                getNodes
                             )
                         }}
                         title={modalWindowName}
@@ -110,7 +120,7 @@ export const ModalWindows = ({
                     <Button
                         additionalBtnClass="delete-btn"
                         clickHandler={(event) => {
-                            deleteNode(
+                            deleteItem(
                                 event,
                                 setNode,
                                 setIsLoading,
@@ -119,7 +129,9 @@ export const ModalWindows = ({
                                 setSmallWindowErrorMessage,
                                 userId,
                                 setIsModalWindowOpen,
-                                activeId
+                                activeId,
+                                deleteNode,
+                                getNodes
                             )
                         }}
                         title={modalWindowName}
