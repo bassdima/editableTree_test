@@ -9,26 +9,26 @@ import { treeToogle } from "../../helpers";
 import "./styles.scss";
 
 export const EditableTree = ({
-    data,
+    userId,
+    setModalWindowName,
+    setItemName,
+    nodeList,
     activeId,
     setActiveId,
-    setModalWindowName,
-    setIsModalWindowOpen,
-    userId,
-    setItemName
+    setIsModalWindowOpen
 }) => {
 
     const [isVisable, setIsVisable] = useState(false);
 
     return (
         <>
-            {data &&
+            {nodeList &&
                 <div>
                     <div
-                        className={classNames("item-tree", { "item-tree_active": activeId === data.id })}
-                        onClick={() => { treeToogle(isVisable, setIsVisable, setActiveId, data) }}
+                        className={classNames("item-tree", { "item-tree_active": activeId === nodeList.id })}
+                        onClick={() => { treeToogle(isVisable, setIsVisable, setActiveId, nodeList) }}
                     >
-                        {data.children.length > 0 &&
+                        {nodeList.children.length > 0 &&
                             <div className="item-tree__chevron">
                                 {isVisable ?
                                     <ExpandLess />
@@ -38,28 +38,29 @@ export const EditableTree = ({
                             </div>
                         }
                         <span>
-                            {data.name === userId ? "Root" : data.name}
+                            {nodeList.name === userId ? "Root" : nodeList.name}
                         </span>
-                        {activeId === data.id &&
+                        {activeId === nodeList.id &&
                             <ListButtons
                                 setModalWindowName={setModalWindowName}
-                                setIsModalWindowOpen={setIsModalWindowOpen}
-                                data={data}
                                 userId={userId}
                                 setItemName={setItemName}
+                                setIsModalWindowOpen={setIsModalWindowOpen}
+                                nodeList={nodeList}
                             />
                         }
                     </div>
                     <div style={{ display: isVisable ? "block" : "none", paddingLeft: 15 }}>
-                        {data.children.map((explore) => (
+                        {nodeList.children.map((explore) => (
                             <EditableTree
                                 key={explore.id}
-                                data={explore}
+                                nodeList={explore}
                                 activeId={activeId}
                                 setActiveId={setActiveId}
                                 setModalWindowName={setModalWindowName}
                                 setIsModalWindowOpen={setIsModalWindowOpen}
                                 setItemName={setItemName}
+                                userId={userId}
                             />
                         ))}
                     </div>

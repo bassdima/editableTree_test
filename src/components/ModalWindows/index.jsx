@@ -3,38 +3,38 @@ import {
     Button,
     SmallErrorModalWindow
 } from "../index";
+import { handleCancelButtonClick } from "../../helpers";
 import {
-    cancelBtnEditList,
-    addItem,
-    renameItem,
-    deleteItem
-} from "../../helpers";
-import {
-    getNodes,
-    postNode,
-    renameNode,
-    deleteNode
-} from '../../API';
+    useIsModalWindowOpen,
+    useInputText,
+    useSetInputText,
+    useSetLargeWindowErrorMessage,
+    useSetIsModalWindowOpen,
+    useSetSmallWindowErrorMessage,
+    useLargeWindowErrorMessage,
+    useIsError,
+    useSmallWindowErrorMessage,
+    useIsLoading,
+    useAddItem,
+    useRenameItem,
+    useDeleteItem,
+} from "../../context";
 
-export const ModalWindows = ({
-    isModalWindowOpen,
-    inputText,
-    setInputText,
-    modalWindowName,
-    setLargeWindowErrorMessage,
-    setIsModalWindowOpen,
-    setNode,
-    setIsLoading,
-    setIsError,
-    setSmallWindowErrorMessage,
-    userId,
-    activeId,
-    largeWindowErrorMessage,
-    isError,
-    smallWindowErrorMessage,
-    itemName,
-    isLoading
-}) => {
+export const ModalWindows = ({ modalWindowName, itemName }) => {
+    const isModalWindowOpen = useIsModalWindowOpen();
+    const setIsModalWindowOpen = useSetIsModalWindowOpen();
+    const inputText = useInputText();
+    const setInputText = useSetInputText();
+    const largeWindowErrorMessage = useLargeWindowErrorMessage();
+    const setLargeWindowErrorMessage = useSetLargeWindowErrorMessage();
+    const smallWindowErrorMessage = useSmallWindowErrorMessage();
+    const setSmallWindowErrorMessage = useSetSmallWindowErrorMessage();
+    const isError = useIsError();
+    const isLoading = useIsLoading();
+    const addItem = useAddItem();
+    const renameItem = useRenameItem();
+    const deleteItem = useDeleteItem();
+
     return (
         <>
             {modalWindowName === "add" && isModalWindowOpen &&
@@ -46,27 +46,11 @@ export const ModalWindows = ({
                     modalWindowName={modalWindowName}
                     setLargeWindowErrorMessage={setLargeWindowErrorMessage}
                     setIsModalWindowOpen={setIsModalWindowOpen}
-                    clickHandlerCancelBtn={cancelBtnEditList}
+                    cancelButtonHandler={handleCancelButtonClick}
                 >
                     <Button
                         additionalBtnClass="secondary-btn"
-                        clickHandler={(event) => {
-                            addItem(
-                                event,
-                                setNode,
-                                setIsLoading,
-                                setIsError,
-                                setLargeWindowErrorMessage,
-                                setSmallWindowErrorMessage,
-                                userId,
-                                setIsModalWindowOpen,
-                                activeId,
-                                inputText,
-                                setInputText,
-                                postNode,
-                                getNodes
-                            );
-                        }}
+                        clickHandler={addItem}
                         title={modalWindowName}
                     />
                 </MainPopupWindow>
@@ -81,27 +65,11 @@ export const ModalWindows = ({
                     modalWindowName={modalWindowName}
                     setLargeWindowErrorMessage={setLargeWindowErrorMessage}
                     setIsModalWindowOpen={setIsModalWindowOpen}
-                    clickHandlerCancelBtn={cancelBtnEditList}
+                    cancelButtonHandler={handleCancelButtonClick}
                 >
                     <Button
                         additionalBtnClass="secondary-btn"
-                        clickHandler={(event) => {
-                            renameItem(
-                                event,
-                                setNode,
-                                setIsLoading,
-                                setIsError,
-                                setLargeWindowErrorMessage,
-                                setSmallWindowErrorMessage,
-                                userId,
-                                setIsModalWindowOpen,
-                                activeId,
-                                inputText,
-                                setInputText,
-                                renameNode,
-                                getNodes
-                            )
-                        }}
+                        clickHandler={renameItem}
                         title={modalWindowName}
                     />
                 </MainPopupWindow>
@@ -115,25 +83,11 @@ export const ModalWindows = ({
                     setLargeWindowErrorMessage={setLargeWindowErrorMessage}
                     setIsModalWindowOpen={setIsModalWindowOpen}
                     itemName={itemName}
-                    clickHandlerCancelBtn={cancelBtnEditList}
+                    cancelButtonHandler={handleCancelButtonClick}
                 >
                     <Button
                         additionalBtnClass="delete-btn"
-                        clickHandler={(event) => {
-                            deleteItem(
-                                event,
-                                setNode,
-                                setIsLoading,
-                                setIsError,
-                                setLargeWindowErrorMessage,
-                                setSmallWindowErrorMessage,
-                                userId,
-                                setIsModalWindowOpen,
-                                activeId,
-                                deleteNode,
-                                getNodes
-                            )
-                        }}
+                        clickHandler={deleteItem}
                         title={modalWindowName}
                     />
                 </MainPopupWindow>
@@ -152,7 +106,7 @@ export const ModalWindows = ({
                     setLargeWindowErrorMessage={setLargeWindowErrorMessage}
                     setIsModalWindowOpen={setIsModalWindowOpen}
                     isError={isError}
-                    clickHandlerCancelBtn={cancelBtnEditList}
+                    cancelButtonHandler={handleCancelButtonClick}
                 />
             }
 

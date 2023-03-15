@@ -7,7 +7,7 @@ export const EditCard = ({
     setInputText,
     modalWindowName,
     setIsModalWindowOpen,
-    clickHandlerCancelBtn,
+    cancelButtonHandler,
     children,
     isError,
     setLargeWindowErrorMessage
@@ -31,7 +31,7 @@ export const EditCard = ({
             <div className="card__btns-container">
                 <Button
                     clickHandler={() => {
-                        clickHandlerCancelBtn(
+                        cancelButtonHandler(
                             setIsModalWindowOpen,
                             title,
                             setInputText,

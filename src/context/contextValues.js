@@ -1,0 +1,20 @@
+import { useContext } from "react";
+import { NodeListContext } from "./index";
+
+export const useNodeList = () => useContext(NodeListContext).nodeList;
+export const useActiveId = () => useContext(NodeListContext).activeId;
+export const useSetActiveId = () => useContext(NodeListContext).setActiveId;
+export const useInputText = () => useContext(NodeListContext).inputText;
+export const useSetInputText = () => useContext(NodeListContext).setInputText;
+export const useIsModalWindowOpen = () => useContext(NodeListContext).isModalWindowOpen;
+export const useSetIsModalWindowOpen = () => useContext(NodeListContext).setIsModalWindowOpen;
+export const useLargeWindowErrorMessage = () => useContext(NodeListContext).largeWindowErrorMessage;
+export const useSetLargeWindowErrorMessage = () => useContext(NodeListContext).setLargeWindowErrorMessage;
+export const useSmallWindowErrorMessage = () => useContext(NodeListContext).smallWindowErrorMessage;
+export const useSetSmallWindowErrorMessage = () => useContext(NodeListContext).setSmallWindowErrorMessage;
+export const useIsError = () => useContext(NodeListContext).isError;
+export const useIsLoading = () => useContext(NodeListContext).isLoading;
+export const useGetAllNodes = () => useContext(NodeListContext).getAllNodes;
+export const useAddItem = () => useContext(NodeListContext).addItem;
+export const useRenameItem = () => useContext(NodeListContext).renameItem;
+export const useDeleteItem = () => useContext(NodeListContext).deleteItem;

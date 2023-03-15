@@ -4,13 +4,14 @@ import "./styles.scss";
 export const ListButtons = ({
     setModalWindowName,
     setIsModalWindowOpen,
-    data,
+    nodeList,
     userId,
     setItemName
 }) => {
+
     return (
         <div className="buttons-wrapper">
-            {data.name === userId ?
+            {nodeList.name === userId ?
                 <div
                     className="primary-list-btn"
                     onClick={() => {
@@ -28,7 +29,7 @@ export const ListButtons = ({
                     onClick={() => {
                         setModalWindowName(item);
                         setIsModalWindowOpen(true);
-                        setItemName(data.name);
+                        setItemName(nodeList.name);
                 }}>
                     {modalWindowContent[item]}
                 </div>

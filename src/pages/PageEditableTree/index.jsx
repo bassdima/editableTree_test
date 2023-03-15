@@ -1,26 +1,41 @@
 import { EditableTree } from "../../components";
+import {
+    useGetAllNodes,
+    useNodeList,
+    useActiveId,
+    useSetActiveId,
+    useSetIsModalWindowOpen
+} from "../../context";
+import { useEffect } from "react";
 import "./styles.scss";
 
 export const PageEditableTree = ({
-    data,
-    activeId,
-    setActiveId,
     setModalWindowName,
-    setIsModalWindowOpen,
     userId,
     setItemName
 }) => {
+
+const getAllNodes = useGetAllNodes();
+const nodeList = useNodeList();
+const activeId = useActiveId();
+const setActiveId = useSetActiveId();
+const setIsModalWindowOpen = useSetIsModalWindowOpen();
+
+useEffect(() => {
+    getAllNodes();
+}, [getAllNodes]);
+
     return (
         <div className="page-tree-wrapper">
             {(userId !== undefined || localStorage.getItem('UUID') !== null) &&
                 <EditableTree
-                    data={data}
+                    nodeList={nodeList}
                     activeId={activeId}
                     setActiveId={setActiveId}
                     setModalWindowName={setModalWindowName}
-                    setIsModalWindowOpen={setIsModalWindowOpen}
                     userId={userId}
                     setItemName={setItemName}
+                    setIsModalWindowOpen={setIsModalWindowOpen}
                 />
             }
         </div>

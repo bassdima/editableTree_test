@@ -8,7 +8,7 @@ export const MainPopupWindow = ({
     setInputText,
     modalWindowName,
     setIsModalWindowOpen,
-    clickHandlerCancelBtn,
+    cancelButtonHandler,
     isLoading,
     children,
     isError,
@@ -27,7 +27,7 @@ export const MainPopupWindow = ({
                         setInputText={setInputText}
                         modalWindowName={modalWindowName}
                         setIsModalWindowOpen={setIsModalWindowOpen}
-                        clickHandlerCancelBtn={clickHandlerCancelBtn}
+                        cancelButtonHandler={cancelButtonHandler}
                         children={children}
                         isError={isError}
                         setLargeWindowErrorMessage={setLargeWindowErrorMessage}
