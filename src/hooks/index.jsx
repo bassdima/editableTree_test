@@ -51,14 +51,16 @@ export const useNodeList = (userId) => {
 
     const getAllNodes = useCallback(() => {
         handleLoading();
-        getNodes(userId)
-            .then((resonse) => {
-                setNodeList(resonse.data);
-                setIsLoading(false);
-            })
-            .catch((e) => {
-                handleError(e);
-            });
+        if (userId) {
+            getNodes(userId)
+                .then((resonse) => {
+                    setNodeList(resonse.data);
+                    setIsLoading(false);
+                })
+                .catch((e) => {
+                    handleError(e);
+                });
+        }
     }, [userId])
 
     const addItem = useCallback((e) => {
