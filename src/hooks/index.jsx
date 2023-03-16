@@ -61,7 +61,8 @@ export const useNodeList = (userId) => {
             });
     }, [userId])
 
-    const addItem = useCallback(() => {
+    const addItem = useCallback((e) => {
+        e.preventDefault();
         postNode(userId, activeId, inputText)
             .then(() => {
                 getAllNodes();
@@ -74,7 +75,8 @@ export const useNodeList = (userId) => {
         setIsModalWindowOpen(false);
     }, [activeId, getAllNodes, inputText, userId])
 
-    const renameItem = useCallback(() => {
+    const renameItem = useCallback((e) => {
+        e.preventDefault();
         renameNode(userId, activeId, inputText)
             .then(() => {
                 getAllNodes();
@@ -87,7 +89,8 @@ export const useNodeList = (userId) => {
         setIsModalWindowOpen(false);
     }, [activeId, getAllNodes, inputText, userId])
 
-    const deleteItem = useCallback(() => {
+    const deleteItem = useCallback((e) => {
+        e.preventDefault();
         deleteNode(userId, activeId)
             .then(() => {
                 getAllNodes();
@@ -98,8 +101,6 @@ export const useNodeList = (userId) => {
 
         setIsModalWindowOpen(false);
     }, [activeId, getAllNodes, userId]);
-
-    console.log(nodeList);
 
     return {
         nodeList,

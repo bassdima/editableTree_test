@@ -3,8 +3,7 @@ import {
     useGetAllNodes,
     useNodeList,
     useActiveId,
-    useSetActiveId,
-    useSetIsModalWindowOpen
+    useSetActiveId
 } from "../../context";
 import { useEffect } from "react";
 import "./styles.scss";
@@ -19,7 +18,6 @@ const getAllNodes = useGetAllNodes();
 const nodeList = useNodeList();
 const activeId = useActiveId();
 const setActiveId = useSetActiveId();
-const setIsModalWindowOpen = useSetIsModalWindowOpen();
 
 useEffect(() => {
     getAllNodes();
@@ -35,7 +33,6 @@ useEffect(() => {
                     setModalWindowName={setModalWindowName}
                     userId={userId}
                     setItemName={setItemName}
-                    setIsModalWindowOpen={setIsModalWindowOpen}
                 />
             }
         </div>

@@ -1,4 +1,4 @@
-export const treeToogle = (
+export const handleHiddenListButtonClick = (
     isVisable,
     setIsVisable,
     setActiveId,
@@ -9,12 +9,14 @@ export const treeToogle = (
 }
 
 export const handleCancelButtonClick = (
+    e,
     setIsModalWindowOpen,
     title,
     setInputText,
     isError,
     setLargeWindowErrorMessage
 ) => {
+    e.preventDefault();
     setIsModalWindowOpen(false);
     if (title !== "delete" && !isError) setInputText("");
     if (isError) setLargeWindowErrorMessage("");

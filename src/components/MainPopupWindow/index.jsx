@@ -4,16 +4,11 @@ import "./styles.scss";
 export const MainPopupWindow = ({
     title,
     label,
-    inputText,
-    setInputText,
     modalWindowName,
-    setIsModalWindowOpen,
-    cancelButtonHandler,
     isLoading,
-    children,
-    isError,
-    setLargeWindowErrorMessage
+    children
 }) => {
+
     return (
         <div className="modal-window">
             <div className="card">
@@ -23,14 +18,8 @@ export const MainPopupWindow = ({
                     <EditCard
                         title={title}
                         label={label}
-                        inputText={inputText}
-                        setInputText={setInputText}
                         modalWindowName={modalWindowName}
-                        setIsModalWindowOpen={setIsModalWindowOpen}
-                        cancelButtonHandler={cancelButtonHandler}
                         children={children}
-                        isError={isError}
-                        setLargeWindowErrorMessage={setLargeWindowErrorMessage}
                     />
                 }
             </div>

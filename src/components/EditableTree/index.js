@@ -5,7 +5,7 @@ import {
     ExpandLess
 } from '@mui/icons-material';
 import classNames from "classnames";
-import { treeToogle } from "../../helpers";
+import { handleHiddenListButtonClick } from "../../hendlers";
 import "./styles.scss";
 
 export const EditableTree = ({
@@ -15,7 +15,6 @@ export const EditableTree = ({
     nodeList,
     activeId,
     setActiveId,
-    setIsModalWindowOpen
 }) => {
 
     const [isVisable, setIsVisable] = useState(false);
@@ -26,7 +25,7 @@ export const EditableTree = ({
                 <div>
                     <div
                         className={classNames("item-tree", { "item-tree_active": activeId === nodeList.id })}
-                        onClick={() => { treeToogle(isVisable, setIsVisable, setActiveId, nodeList) }}
+                        onClick={() => { handleHiddenListButtonClick(isVisable, setIsVisable, setActiveId, nodeList) }}
                     >
                         {nodeList.children.length > 0 &&
                             <div className="item-tree__chevron">
@@ -45,12 +44,11 @@ export const EditableTree = ({
                                 setModalWindowName={setModalWindowName}
                                 userId={userId}
                                 setItemName={setItemName}
-                                setIsModalWindowOpen={setIsModalWindowOpen}
                                 nodeList={nodeList}
                             />
                         }
                     </div>
-                    <div style={{ display: isVisable ? "block" : "none", paddingLeft: 15 }}>
+                    <div className={`children-tree ${isVisable ? "children-tree_visble" : "children-tree_hidden"}`}>
                         {nodeList.children.map((explore) => (
                             <EditableTree
                                 key={explore.id}
@@ -58,7 +56,6 @@ export const EditableTree = ({
                                 activeId={activeId}
                                 setActiveId={setActiveId}
                                 setModalWindowName={setModalWindowName}
-                                setIsModalWindowOpen={setIsModalWindowOpen}
                                 setItemName={setItemName}
                                 userId={userId}
                             />

@@ -1,17 +1,25 @@
 import { InputTextField, Button } from "../index";
+import { handleCancelButtonClick } from "../../hendlers";
+import {
+    useInputText,
+    useSetInputText,
+    useSetLargeWindowErrorMessage,
+    useSetIsModalWindowOpen,
+    useIsError
+} from "../../context";
 
 export const EditCard = ({
     title,
     label,
-    inputText,
-    setInputText,
     modalWindowName,
-    setIsModalWindowOpen,
-    cancelButtonHandler,
-    children,
-    isError,
-    setLargeWindowErrorMessage
+    children
 }) => {
+
+    const setIsModalWindowOpen = useSetIsModalWindowOpen();
+    const inputText = useInputText();
+    const setInputText = useSetInputText();
+    const setLargeWindowErrorMessage = useSetLargeWindowErrorMessage();
+    const isError = useIsError();
 
     return (
         <>
@@ -30,8 +38,9 @@ export const EditCard = ({
             }
             <div className="card__btns-container">
                 <Button
-                    clickHandler={() => {
-                        cancelButtonHandler(
+                    clickHandler={(e) => {
+                        handleCancelButtonClick(
+                            e,
                             setIsModalWindowOpen,
                             title,
                             setInputText,
