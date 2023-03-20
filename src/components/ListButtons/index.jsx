@@ -1,5 +1,5 @@
 import { modalWindowContent } from "../../constans";
-import { useSetIsModalWindowOpen } from "../../context";
+import { useNodeContext } from "../../context";
 import "./styles.scss";
 
 export const ListButtons = ({
@@ -9,7 +9,7 @@ export const ListButtons = ({
     setItemName
 }) => {
 
-    const setIsModalWindowOpen = useSetIsModalWindowOpen();
+    const { setIsModalWindowOpen } = useNodeContext();
 
     return (
         <div className="buttons-wrapper">

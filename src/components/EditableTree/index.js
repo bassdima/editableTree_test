@@ -5,7 +5,7 @@ import {
     ExpandLess
 } from '@mui/icons-material';
 import classNames from "classnames";
-import { handleHiddenListButtonClick } from "../../hendlers";
+import { useNodeContext } from "../../context";
 import "./styles.scss";
 
 export const EditableTree = ({
@@ -17,6 +17,7 @@ export const EditableTree = ({
     setActiveId,
 }) => {
 
+    const { handleHiddenListButtonClick } = useNodeContext();
     const [isVisable, setIsVisable] = useState(false);
 
     return (
@@ -25,7 +26,7 @@ export const EditableTree = ({
                 <div>
                     <div
                         className={classNames("item-tree", { "item-tree_active": activeId === nodeList.id })}
-                        onClick={() => { handleHiddenListButtonClick(isVisable, setIsVisable, setActiveId, nodeList) }}
+                        onClick={ () => handleHiddenListButtonClick(setIsVisable, isVisable, nodeList.id) }
                     >
                         {nodeList.children.length > 0 &&
                             <div className="item-tree__chevron">

@@ -1,9 +1,9 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { useSetSmallWindowErrorMessage } from '../../context';
+import { useNodeContext } from '../../context';
 import "./styles.scss";
 
 export const SmallErrorModalWindow = ({ error }) => {
-    const setSmallWindowErrorMessage = useSetSmallWindowErrorMessage();
+    const { setSmallWindowErrorMessage } = useNodeContext();
 
     return (
         <div className='s-error-modal'>

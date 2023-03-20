@@ -37,6 +37,18 @@ export const useNodeList = (userId) => {
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
+    const handleHiddenListButtonClick = (setIsVisable, isVisable, nodeId) => {
+        setIsVisable(!isVisable);
+        setActiveId(nodeId);
+    }
+
+    const handleCancelButtonClick = (e, title) => {
+        e.preventDefault();
+        setIsModalWindowOpen(false);
+        if (title !== "delete" && !isError) setInputText("");
+        if (isError) setLargeWindowErrorMessage("");
+    }
+
     const handleError = (e) => {
         setIsError(true);
         setLargeWindowErrorMessage(e.response.data.data.message);
@@ -121,6 +133,8 @@ export const useNodeList = (userId) => {
         getAllNodes,
         addItem,
         renameItem,
-        deleteItem
+        deleteItem,
+        handleHiddenListButtonClick,
+        handleCancelButtonClick
     }
 }

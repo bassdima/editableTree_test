@@ -1,10 +1,5 @@
 import { EditableTree } from "../../components";
-import {
-    useGetAllNodes,
-    useNodeList,
-    useActiveId,
-    useSetActiveId
-} from "../../context";
+import { useNodeContext } from "../../context";
 import { useEffect } from "react";
 import "./styles.scss";
 
@@ -14,14 +9,18 @@ export const PageEditableTree = ({
     setItemName
 }) => {
 
-const getAllNodes = useGetAllNodes();
-const nodeList = useNodeList();
-const activeId = useActiveId();
-const setActiveId = useSetActiveId();
+    const {
+        getAllNodes,
+        nodeList,
+        activeId,
+        setActiveId
+    } = useNodeContext();
 
-useEffect(() => {
-    getAllNodes();
-}, [getAllNodes]);
+    useEffect(() => {
+        getAllNodes();
+    }, [getAllNodes]);
+
+
 
     return (
         <div className="page-tree-wrapper">

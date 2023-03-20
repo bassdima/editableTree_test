@@ -4,6 +4,10 @@ const instance = axios.create({
     baseURL: 'https://test.vmarmysh.com',
 });
 
+//Sending all requests using the post method,
+//as well as passing parameters to the post method,
+//is related to API documentation requirement
+
 export const getNodes = (userId, data = null) => {
     return instance.post('/api.user.tree.get',
         data,

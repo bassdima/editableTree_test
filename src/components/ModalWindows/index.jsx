@@ -3,24 +3,18 @@ import {
     Button,
     SmallErrorModalWindow
 } from "../index";
-import {
-    useIsModalWindowOpen,
-    useLargeWindowErrorMessage,
-    useSmallWindowErrorMessage,
-    useIsLoading,
-    useAddItem,
-    useRenameItem,
-    useDeleteItem,
-} from "../../context";
+import { useNodeContext } from "../../context";
 
 export const ModalWindows = ({ modalWindowName, itemName }) => {
-    const isModalWindowOpen = useIsModalWindowOpen();
-    const largeWindowErrorMessage = useLargeWindowErrorMessage();
-    const smallWindowErrorMessage = useSmallWindowErrorMessage();
-    const isLoading = useIsLoading();
-    const addItem = useAddItem();
-    const renameItem = useRenameItem();
-    const deleteItem = useDeleteItem();
+    const {
+        isModalWindowOpen,
+        largeWindowErrorMessage,
+        smallWindowErrorMessage,
+        isLoading,
+        addItem,
+        renameItem,
+        deleteItem
+    } = useNodeContext();
 
     return (
         <>
@@ -32,7 +26,7 @@ export const ModalWindows = ({ modalWindowName, itemName }) => {
                 >
                     <Button
                         additionalBtnClass="secondary-btn"
-                        clickHandler={(e) => {addItem(e)}}
+                        clickHandler={(e) => { addItem(e) }}
                         title={modalWindowName}
                     />
                 </MainPopupWindow>
